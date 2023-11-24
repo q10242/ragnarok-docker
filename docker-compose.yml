@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  ragnarok:
+    build: .
+    links:
+      - db
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+    ports:
+      - "6900:6900"
+      - "6121:6121"
+      - "5121:5121" 
+      - "8888:8888"
+    # volumes:
+    #   - ./inter_athena.conf:/root/rAthena/conf/inter_athena.conf
+  db:
+    image: mysql:5.7
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: ragnarok
+      MYSQL_DATABASE: ragnarok
+      MYSQL_USER: ragnarok
+      MYSQL_PASSWORD: ragnarok
